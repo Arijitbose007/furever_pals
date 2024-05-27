@@ -1,0 +1,10 @@
+Navbar.jsx:
+
+1)Added props to receive the state (isMenuOpen, toggleMenu, isSupportMenuOpen, toggleSupportMenu) from the parent component.
+2)Updated the button click handler for the menu toggle (toggleMenu) to use the function passed as a prop (toggleMenu) instead of directly updating the state.
+3)Updated the button click handler for the support menu toggle (toggleSupportMenu) to use the function passed as a prop (toggleSupportMenu) instead of directly updating the state.
+4)Updated the conditional rendering of the menu to use the isMenuOpen state received as a prop.
+Home.jsx:
+
+1)Imported and rendered the Navbar component, passing down the necessary props (isMenuOpen, toggleMenu, isSupportMenuOpen, toggleSupportMenu) to manage the menu state.
+2)Ensured that the content section is conditionally hidden based on the isMenuOpen state.
