@@ -1,13 +1,15 @@
-import express from "express";
-import { PORT, mongoDBURL } from "./config.js";
-import mongoose from "mongoose";
+// index.js
 import dotenv from 'dotenv';
 dotenv.config();
+
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import { PORT, mongoDBURL } from './config.js';
 import donateRoute from './routes/donateRoute.js';
 import volunteerRoute from './routes/volunteerRoute.js';
 import adoptRoute from './routes/adoptRoute.js';
 import sosRoute from './routes/sosRoute.js';
-import cors from 'cors';
 
 const app = express();
 
@@ -35,7 +37,7 @@ app.use('/sos', sosRoute);
 mongoose
   .connect(mongoDBURL)
   .then(() => {
-    console.log("App connected to the database");
+    console.log('App connected to the database');
     app.listen(PORT, () => {
       console.log(`App is listening on port: ${PORT}`);
     });
