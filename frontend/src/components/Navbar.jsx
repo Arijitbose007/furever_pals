@@ -33,7 +33,7 @@ const Navbar = ({
           <Link to="/" className="logo-border">
             <img
               className="rounded-full w-20 h-20"
-              src="src/assets/Images/logo.png"
+              src="src/assets/Images/logo.jpg"
               alt="logos"
             />
           </Link>

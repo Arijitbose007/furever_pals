@@ -10,7 +10,7 @@ const Footer = ({ isFixed, isLogoVisible }) => {
           <div>
             <img
               className="rounded-full w-24 cursor-pointer"
-              src="src/assets/Images/logo.png"
+              src="src/assets/Images/logo.jpg"
               alt="logo"
             />
           </div>

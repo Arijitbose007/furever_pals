@@ -29,7 +29,7 @@ const BackToTop = () => {
 
   return (
     <div className={`back-to-top ${isVisible ? 'show' : ''}`} onClick={scrollToTop}>
-      <img src="src/assets/Images/uparrow.png" alt="Back to Top" />
+      <img src="src/assets/Images/uparrow.jpg" alt="Back to Top" />
     </div>
   );
 };
