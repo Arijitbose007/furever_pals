@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Components.css";
+import logoSrc from "../assets/Images/logo.png";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const DashNavbar = ({
@@ -31,7 +32,7 @@ const DashNavbar = ({
           <Link to="/" className="logo-border">
             <img
               className="rounded-full w-20 h-20"
-              src="src/assets/Images/logo.jpg"
+              src={logoSrc}
               alt="logos"
             />
           </Link>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logoSrc from "../assets/Images/logo.png";
 import "../components/Components.css";
 
 const Footer = ({ isFixed, isLogoVisible }) => {
@@ -10,7 +11,7 @@ const Footer = ({ isFixed, isLogoVisible }) => {
           <div>
             <img
               className="rounded-full w-24 cursor-pointer"
-              src="src/assets/Images/logo.jpg"
+              src={logoSrc}
               alt="logo"
             />
           </div>

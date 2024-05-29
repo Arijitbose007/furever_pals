@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Components.css'; // Import any necessary CSS for styling
+import topSrc from "../assets/Images/uparrow.png";
 
 const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,7 +30,7 @@ const BackToTop = () => {
 
   return (
     <div className={`back-to-top ${isVisible ? 'show' : ''}`} onClick={scrollToTop}>
-      <img src="src/assets/Images/uparrow.jpg" alt="Back to Top" />
+      <img src={topSrc} alt="Back to Top" />
     </div>
   );
 };
