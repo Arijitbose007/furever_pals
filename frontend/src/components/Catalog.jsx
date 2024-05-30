@@ -1,10 +1,10 @@
 // src/pages/Catalog.jsx
 import React, { useState, useEffect } from "react";
-import "../components/Components.css";
 import axios from "axios";
 import ProtectedButton from "../components/ProtectedButton";
+import NoDataFound from "./NoDataFound";
 
-const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
+const Catalog = ({ isCarousel, searchQuery, selectedFilter }) => {
   const [approvedDonations, setApprovedDonations] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -13,9 +13,7 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/donate`);
         const allDonations = response.data.data;
-        const approvedDonations = allDonations.filter(
-          (donation) => donation.status === "Approved"
-        );
+        const approvedDonations = allDonations.filter(donation => donation.status === "Approved");
         setApprovedDonations(approvedDonations);
       } catch (error) {
         console.error("Error fetching donations:", error);
@@ -51,33 +49,32 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
 
   const filterItems = (items) => {
     const searchLower = searchQuery.toLowerCase();
-    const filters = Array.isArray(selectedFilters) ? selectedFilters : [selectedFilters]; // Ensure selectedFilters is always an array
     return items.filter((item) => {
-      const matchesFilters = filters.every((filter) => {
-        if (filter === "Location") {
-          return (
-            item.city?.toLowerCase().includes(searchLower) ||
-            item.state?.toLowerCase().includes(searchLower)
-          );
-        }
-        if (filter === "Pet Type") {
-          return item.petType?.toLowerCase().includes(searchLower);
-        }
-        if (filter === "Gender") {
-          return item.gender?.toLowerCase().includes(searchLower);
-        }
-        if (filter === "Breed") {
-          return item.breed?.toLowerCase().includes(searchLower);
-        }
-        return true;
-      });
-      return matchesFilters;
+      const field = selectedFilter.toLowerCase();
+      if (!selectedFilter) return true; // If no filter is selected, show all items
+
+      if (field === "location") {
+        return item.city?.toLowerCase() === searchLower || item.state?.toLowerCase() === searchLower;
+      }
+      if (field === "pet type") {
+        return item.petType?.toLowerCase() === searchLower;
+      }
+      if (field === "gender") {
+        return item.gender?.toLowerCase() === searchLower;
+      }
+      if (field === "breed") {
+        return item.breed?.toLowerCase() === searchLower;
+      }
+      return true;
     });
   };
 
-  const displayedDonations = searchQuery
-    ? filterItems(approvedDonations)
-    : approvedDonations;
+  const displayedDonations = searchQuery ? filterItems(approvedDonations) : approvedDonations;
+
+  if (displayedDonations.length === 0) {
+    return <NoDataFound />;
+  }
+
 
   if (isCarousel) {
     return (
