@@ -21,7 +21,6 @@ const RoleBasedRedirect = () => {
       console.log('User roles:', userRoles);
 
       if (userRoles && userRoles.includes('admin')) {
-        // If user is admin, redirect to admin routes
         const adminRoutes = ['/adshelter', '/volshelter', '/sosshelter', '/shelter'];
         console.log('Admin detected, current path:', location.pathname);
 
@@ -30,7 +29,6 @@ const RoleBasedRedirect = () => {
           navigate('/shelter');
         }
       } else {
-        // If user is not admin, allow access to public routes
         const publicRoutes = ['/volunteer','/buddies', '/sos', '/contactus', '/donate', '/adopt'];
         console.log('Non-admin detected, current path:', location.pathname);
 
