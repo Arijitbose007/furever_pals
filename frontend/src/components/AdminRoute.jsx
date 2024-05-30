@@ -6,27 +6,23 @@ const AdminRoute = ({ children }) => {
   const { isAuthenticated, user, isLoading } = useAuth0();
   const location = useLocation();
   const namespace = import.meta.env.VITE_NAMESPACE;
+  const userRoles = user && user[`${namespace}roles`];
 
-  console.log('Namespace:', namespace);
   console.log('isLoading:', isLoading);
   console.log('isAuthenticated:', isAuthenticated);
-  console.log('User:', user);
-
-  const userRoles = user && user[`${namespace}roles`];
-  console.log('User roles:', userRoles);
+  console.log('User:', user); // Log the user object
+  console.log('User roles:', userRoles); // Log the user roles
 
   if (isLoading) {
-    return <div>Loading...</div>; // Display a loading message while the user data is being fetched
+    return <div>Loading...</div>;
   }
 
   if (!isAuthenticated) {
-    console.log('User is not authenticated. Redirecting to home.');
     return <Navigate to="/" state={{ from: location }} />;
   }
 
   if (!userRoles || !userRoles.includes('admin')) {
-    console.log('User does not have admin role. Redirecting to home.');
-    return <Navigate to="/" state={{ from: location }} />;
+    return <Navigate to="/" />;
   }
 
   return children;
