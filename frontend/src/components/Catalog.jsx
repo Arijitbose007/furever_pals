@@ -11,7 +11,7 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
   useEffect(() => {
     const fetchDonations = async () => {
       try {
-        const response = await axios.get(`http://localhost:5555/donate`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/donate`);
         const allDonations = response.data.data;
         const approvedDonations = allDonations.filter(
           (donation) => donation.status === "Approved"
