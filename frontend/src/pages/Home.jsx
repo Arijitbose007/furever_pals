@@ -40,7 +40,7 @@ const Home = () => {
     const fetchApprovedDonations = async () => {
       try {
         // Fetch all donations
-        const response = await axios.get(`http://localhost:5555/donate`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/donate`);
         const allDonations = response.data.data;
 
         // Filter out approved donations
