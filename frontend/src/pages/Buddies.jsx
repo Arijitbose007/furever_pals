@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import "../components/Components.css";
 import BackToTop from "../components/Backtotop";
 import Catalog from "../components/Catalog";
+import NoDataFound from "../components/NoDataFound";
 
 const Buddies = () => {
   const customStyle = true;
@@ -93,7 +94,7 @@ const Buddies = () => {
       </div>
       <Catalog isCarousel={false} searchQuery={actualSearchQuery} selectedFilter={selectedFilter} />
       <BackToTop />
-      
+      <NoDataFound/>
     </>
   );
 };
