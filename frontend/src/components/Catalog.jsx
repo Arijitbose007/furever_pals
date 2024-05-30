@@ -51,8 +51,9 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
 
   const filterItems = (items) => {
     const searchLower = searchQuery.toLowerCase();
+    const filters = Array.isArray(selectedFilters) ? selectedFilters : [selectedFilters]; // Ensure selectedFilters is always an array
     return items.filter((item) => {
-      const matchesFilters = selectedFilters.every((filter) => {
+      const matchesFilters = filters.every((filter) => {
         if (filter === "Location") {
           return (
             item.city?.toLowerCase().includes(searchLower) ||
