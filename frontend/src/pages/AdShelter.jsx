@@ -23,7 +23,7 @@ const Shelter = () => {
   useEffect(() => {
     const fetchAdoptions = async () => {
       try {
-        const response = await axios.get(`http://localhost:5555/adopt`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/adopt`);
         setAdoptions(response.data.data);
       } catch (error) {
         console.error("Error fetching adoptions:", error);
@@ -36,7 +36,7 @@ const Shelter = () => {
   const handleDelete = async (id) => {
     try {
       setAdoptions(adoptions.filter((adoption) => adoption._id !== id));
-      await axios.delete(`http://localhost:5555/adopt/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/adopt/${id}`);
     } catch (error) {
       console.error("Error deleting adoption:", error);
     }
@@ -52,7 +52,7 @@ const Shelter = () => {
       });
       setAdoptions(updatedAdoptions);
 
-      await axios.patch(`http://localhost:5555/adopt/${id}/approve`, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/adopt/${id}/approve`, {
         status: "Approved",
       });
     } catch (error) {

@@ -23,7 +23,7 @@ const VolShelter = () => {
   useEffect(() => {
     const fetchVolunteers = async () => {
       try {
-        const response = await axios.get(`http://localhost:5555/volunteer`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/volunteer`);
         setVolunteers(response.data.data);
       } catch (error) {
         console.error("Error fetching volunteers:", error);
@@ -36,7 +36,7 @@ const VolShelter = () => {
   const handleDelete = async (id) => {
     try {
       setVolunteers(volunteers.filter((volunteer) => volunteer._id !== id));
-      await axios.delete(`http://localhost:5555/volunteer/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/volunteer/${id}`);
     } catch (error) {
       console.error("Error deleting volunteer:", error);
     }
@@ -52,7 +52,7 @@ const VolShelter = () => {
       });
       setVolunteers(updatedVolunteers);
 
-      await axios.patch(`http://localhost:5555/volunteer/${id}/approve`, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/volunteer/${id}/approve`, {
         status: "Approved",
       });
     } catch (error) {
@@ -79,7 +79,7 @@ const VolShelter = () => {
               <div className="md:shrink-0">
                 <img
                   className="h-80 w-full bg-cover bg-no-repeat md:w-64"
-                  src={`http://localhost:5555${volunteer.volunteerImage}`}
+                  src={`${import.meta.env.VITE_API_URL}${volunteer.volunteerImage}`}
                   alt="Volunteer Image"
                 />
               </div>

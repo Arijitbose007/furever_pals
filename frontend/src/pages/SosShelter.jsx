@@ -23,7 +23,7 @@ const SosShelter = () => {
   useEffect(() => {
     const fetchSoses = async () => {
       try {
-        const response = await axios.get(`http://localhost:5555/sos`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/sos`);
         setSoses(response.data.data);
       } catch (error) {
         console.error("Error fetching soses:", error);
@@ -36,7 +36,7 @@ const SosShelter = () => {
   const handleDelete = async (id) => {
     try {
       setSoses(soses.filter((sos) => sos._id !== id));
-      await axios.delete(`http://localhost:5555/sos/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/sos/${id}`);
     } catch (error) {
       console.error("Error deleting sos:", error);
     }
@@ -52,7 +52,7 @@ const SosShelter = () => {
       });
       setSoses(updatedSoses);
 
-      await axios.patch(`http://localhost:5555/sos/${id}/approve`, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/sos/${id}/approve`, {
         status: "Approved",
       });
     } catch (error) {
@@ -112,7 +112,7 @@ const SosShelter = () => {
               <div className="md:shrink-0">
                 <img
                   className="h-80 w-full bg-cover bg-no-repeat md:w-64"
-                  src={`http://localhost:5555${sos.sosImage}`}
+                  src={`${import.meta.env.VITE_API_URL}${sos.sosImage}`}
                   alt="Sos Image"
                 />
               </div>

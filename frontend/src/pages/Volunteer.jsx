@@ -64,7 +64,7 @@ const Volunteer = () => {
         formDataToSend.append(key, formData[key]);
       }
       console.log(formDataToSend);
-      const response = await axios.post(`http://localhost:5555/volunteer`, formDataToSend);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/volunteer`, formDataToSend);
       console.log("Volunteer submitted successfully:", response.data);
       toast.success("Volunteer submitted successfully!");
       // Reset form data

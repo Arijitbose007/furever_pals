@@ -40,7 +40,7 @@ const Adopt = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5555/adopt`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/adopt`, formData);
       console.log("Adoption submitted successfully:", response.data);
       toast.success("Adoption submitted successfully!");
       setFormData({

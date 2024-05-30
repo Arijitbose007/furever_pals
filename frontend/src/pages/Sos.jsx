@@ -52,7 +52,7 @@ const Sos = () => {
         formDataToSend.append(key, formData[key]);
       }
       console.log(formDataToSend);
-      const response = await axios.post(`http://localhost:5555/sos`,formDataToSend);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/sos`, formDataToSend);
       console.log("Soses submitted successfully:", response.data);
       toast.success("Adoption submitted successfully!");
        // Reset form fields

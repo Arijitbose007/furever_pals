@@ -23,7 +23,7 @@ const Shelter = () => {
   useEffect(() => {
     const fetchDonations = async () => {
       try {
-        const response = await axios.get(`http://localhost:5555/donate`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/donate`);
         setDonations(response.data.data);
       } catch (error) {
         console.error("Error fetching donations:", error);
@@ -36,7 +36,7 @@ const Shelter = () => {
   const handleDelete = async (id) => {
     try {
       setDonations(donations.filter((donation) => donation._id !== id));
-      await axios.delete(`http://localhost:5555/donate/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/donate/${id}`);
     } catch (error) {
       console.error("Error deleting donation:", error);
     }
@@ -52,7 +52,7 @@ const Shelter = () => {
       });
       setDonations(updatedDonations);
 
-      await axios.patch(`http://localhost:5555/donate/${id}/approve`, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/donate/${id}/approve`, {
         status: "Approved",
       });
     } catch (error) {
@@ -79,7 +79,7 @@ const Shelter = () => {
         <div className="md:shrink-0">
           <img
             className="h-80 w-full bg-cover bg-no-repeat md:w-64"
-            src={`http://localhost:5555${donation.petImage}`}
+            src={`${import.meta.env.VITE_API_URL}${donation.petImage}`}
             alt="Sos Image"
           />
         </div>

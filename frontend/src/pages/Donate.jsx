@@ -55,7 +55,7 @@ const Donate = () => {
         formDataToSend.append(key, formData[key]);
       }
       console.log(formDataToSend);
-      const response = await axios.post(`http://localhost:5555/donate`, formDataToSend);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/donate`, formDataToSend);
       console.log("Donation submitted successfully:", response.data);
       toast.success("Adoption submitted successfully!");
        // Reset form fields
