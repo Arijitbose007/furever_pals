@@ -52,37 +52,26 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
   const filterItems = (items) => {
     const searchLower = searchQuery.toLowerCase();
     const filters = Array.isArray(selectedFilters) ? selectedFilters : [selectedFilters]; // Ensure selectedFilters is always an array
-
     return items.filter((item) => {
-      const matchesSearchQuery =
-        (item.name && item.name.toLowerCase().includes(searchLower)) ||
-        (item.number && item.number.toLowerCase().includes(searchLower)) ||
-        (item.city && item.city.toLowerCase().includes(searchLower)) ||
-        (item.state && item.state.toLowerCase().includes(searchLower)) ||
-        (item.petType && item.petType.toLowerCase().includes(searchLower)) ||
-        (item.gender && item.gender.toLowerCase().includes(searchLower)) ||
-        (item.breed && item.breed.toLowerCase().includes(searchLower));
-
       const matchesFilters = filters.every((filter) => {
         if (filter === "Location") {
           return (
-            (item.city && item.city.toLowerCase().includes(searchLower)) ||
-            (item.state && item.state.toLowerCase().includes(searchLower))
+            item.city?.toLowerCase().includes(searchLower) ||
+            item.state?.toLowerCase().includes(searchLower)
           );
         }
         if (filter === "Pet Type") {
-          return item.petType && item.petType.toLowerCase().includes(searchLower);
+          return item.petType?.toLowerCase().includes(searchLower);
         }
         if (filter === "Gender") {
-          return item.gender && item.gender.toLowerCase().includes(searchLower);
+          return item.gender?.toLowerCase().includes(searchLower);
         }
         if (filter === "Breed") {
-          return item.breed && item.breed.toLowerCase().includes(searchLower);
+          return item.breed?.toLowerCase().includes(searchLower);
         }
         return true;
       });
-
-      return matchesSearchQuery && matchesFilters;
+      return matchesFilters;
     });
   };
 
@@ -123,23 +112,34 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
                         {donation.name}
                       </div>
                       <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                        {donation.breed}
-                      </div>
-                      <div className="pb-2 uppercase text-sm font-semibold">
                         {donation.gender}
                       </div>
-                      <div className="pb-2 uppercase text-sm font-semibold">
-                        {donation.petType}
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.color}
                       </div>
-                      <div className="pb-2 uppercase text-sm font-semibold">
-                        {donation.city}, {donation.state}
-                      </div>
-                    </div>
-                    <div className="flex sm:flex-col sm:gap-10 md:gap-2 mr-5 mt-4 sm:flex-row md:flex-col gap-2">
-                      <div className="uppercase text-xs font-semibold mr-2 md:text-center">
-                        <ProtectedButton label="Contact" number={donation.number} />
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.city}
                       </div>
                     </div>
+                    <div className="m-4 relative flex-col">
+                      <div className="pt-6 mb-9 flex items-center justify-center uppercase text-sm font-semibold">
+                        <br />
+                      </div>
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.breed}
+                      </div>
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.age} yr
+                      </div>
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.state}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="m-3 flex flex-col items-center justify-center">
+                    <ProtectedButton redirectTo="/adopt">
+                      Adopt me
+                    </ProtectedButton>
                   </div>
                 </div>
               </div>
@@ -156,45 +156,63 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
     );
   }
 
+  // Default non-carousel behavior
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-12 mb-8 mt-8">
+    <div className="flex flex-wrap justify-center">
       {displayedDonations.map((donation) => (
         <div
           key={donation._id}
-          className="my-3 flex-col justify-between rounded-xl overflow-hidden"
+          className="mt-3 mb-3 w-full max-w-md mx-auto bg-white rounded-xl shadow-2xl overflow-hidden md:max-w-2xl"
         >
-          <div className="md:flex rounded-xl shadow-2xl bg-cardColor">
-            <div className="md:shrink-0 w-full md:w-auto">
+          <div className="md:flex">
+            <div className="md:shrink-0">
               <img
-                className="h-48 md:h-80 w-full object-cover rounded-xl md:w-60 lg:w-80"
+                className="h-80 w-full object-cover md:w-64"
                 src={`${import.meta.env.VITE_API_URL}${donation.petImage}`}
                 alt="Pet Image"
               />
             </div>
-            <div className="flex-col">
-              <div className="flex sm:w-108 md:gap-4 sm:gap-8 md:flex-row">
-                <div className="m-4 flex-col">
-                  <div className="pt-6 pl-1 mb-9 uppercase text-sm font-semibold">
-                    {donation.name}
+            <div className="flex flex-col justify-between p-4 w-full">
+              <div className="flex flex-col sm:flex-row sm:justify-between">
+                <div className="m-2 flex-col truncate overflow-hidden">
+                  <div className="pt-2 pl-1 mb-2 uppercase text-sm font-semibold">
+                    {donation.fullName}
                   </div>
-                  <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                    {donation.breed}
+                  <div className="p-1 uppercase mb-2 text-sm font-semibold">
+                    {donation.number}
                   </div>
-                  <div className="pb-2 uppercase text-sm font-semibold">
+                  <div className="p-1 uppercase mb-2 text-sm font-semibold">
+                    {donation.city}
+                  </div>
+                  <div className="p-1 uppercase text-sm font-semibold">
+                    {donation.age} yr old
+                  </div>
+                </div>
+                <div className="m-2 flex-col truncate overflow-hidden">
+                  <div className="pt-2 pl-1 mb-2 uppercase text-sm font-semibold">
                     {donation.gender}
                   </div>
-                  <div className="pb-2 uppercase text-sm font-semibold">
-                    {donation.petType}
+                  <div className="p-1 mb-2 uppercase text-sm font-semibold">
+                    {donation.breed}
                   </div>
-                  <div className="pb-2 uppercase text-sm font-semibold">
-                    {donation.city}, {donation.state}
+                  <div className="p-1 uppercase mb-2 text-sm font-semibold">
+                    {donation.state}
                   </div>
-                </div>
-                <div className="flex sm:flex-col sm:gap-10 md:gap-2 mr-5 mt-4 sm:flex-row md:flex-col gap-2">
-                  <div className="uppercase text-xs font-semibold mr-2 md:text-center">
-                    <ProtectedButton label="Contact" number={donation.number} />
+                  <div className="p-1 uppercase text-sm font-semibold">
+                    {donation.color}
                   </div>
                 </div>
+              </div>
+              <div className="ml-2 w-full">
+                <div className="pt-2 pl-1 mb-2 uppercase text-sm font-semibold break-words">
+                  {donation.email}
+                </div>
+                <div className="p-1 uppercase text-sm font-semibold break-words">
+                  {donation.address}
+                </div>
+              </div>
+              <div className="flex justify-center mt-4 w-full">
+                <ProtectedButton redirectTo="/adopt">Adopt me</ProtectedButton>
               </div>
             </div>
           </div>
