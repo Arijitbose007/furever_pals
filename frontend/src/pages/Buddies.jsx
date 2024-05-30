@@ -13,7 +13,7 @@ const Buddies = () => {
   const [isSupportMenuOpen, setIsSupportMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [actualSearchQuery, setActualSearchQuery] = useState("");
-  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("");
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
 
   const filters = ["Location", "Pet Type", "Gender", "Breed"];
@@ -31,11 +31,7 @@ const Buddies = () => {
   };
 
   const selectFilter = (filter) => {
-    if (selectedFilters.includes(filter)) {
-      setSelectedFilters(selectedFilters.filter((f) => f !== filter));
-    } else {
-      setSelectedFilters([...selectedFilters, filter]);
-    }
+    setSelectedFilter(filter);
     setIsFilterDropdownOpen(false); // Close dropdown after selection
   };
 
@@ -80,11 +76,7 @@ const Buddies = () => {
                 <button
                   key={filter}
                   onClick={() => selectFilter(filter)}
-                  className={`p-2 m-1 rounded-lg border ${
-                    selectedFilters.includes(filter)
-                      ? "bg-blue-500 text-white"
-                      : "bg-blue-400 text-black"
-                  }`}
+                  className={`p-2 m-1 rounded-lg border ${selectedFilter === filter ? 'bg-blue text-white' : 'bg-blue-400 text-black'}`}
                 >
                   {filter}
                 </button>
@@ -99,12 +91,9 @@ const Buddies = () => {
           Search
         </button>
       </div>
-      <Catalog
-        isCarousel={false}
-        searchQuery={actualSearchQuery}
-        selectedFilters={selectedFilters}
-      />
+      <Catalog isCarousel={false} searchQuery={actualSearchQuery} selectedFilter={selectedFilter} />
       <BackToTop />
+      
     </>
   );
 };
