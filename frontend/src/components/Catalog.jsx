@@ -1,4 +1,4 @@
-// Catalog.jsx
+// src/pages/Catalog.jsx
 import React, { useState, useEffect } from "react";
 import "../components/Components.css";
 import axios from "axios";
@@ -100,50 +100,47 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
                 <div className="md:shrink-0 w-full md:w-auto">
                   <img
                     className="h-48 md:h-80 w-full object-cover rounded-xl md:w-60 lg:w-80"
-                    src={`http://localhost:5555${donation.petImage}`}
+                    src={`${import.meta.env.VITE_API_URL}${donation.petImage}`}
                     alt="Pet Image"
                   />
                 </div>
                 <div className="flex-col">
-                <div className="flex sm:w-108 md:gap-4 sm:gap-8 md:flex-row">
-                  <div className="m-4 flex-col">
-                    <div className="pt-6 pl-1 mb-9 uppercase text-sm font-semibold">
-                      {donation.name}
+                  <div className="flex sm:w-108 md:gap-4 sm:gap-8 md:flex-row">
+                    <div className="m-4 flex-col">
+                      <div className="pt-6 pl-1 mb-9 uppercase text-sm font-semibold">
+                        {donation.name}
+                      </div>
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.gender}
+                      </div>
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.color}
+                      </div>
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.city}
+                      </div>
                     </div>
-                    <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                      {donation.gender}
-                    </div>
-                    <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                      {donation.color}
-                    </div>
-                    <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                      {donation.city}
+                    <div className="m-4 relative flex-col">
+                      <div className="pt-6 mb-9 flex items-center justify-center uppercase text-sm font-semibold">
+                        <br />
+                      </div>
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.breed}
+                      </div>
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.age} yr
+                      </div>
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.state}
+                      </div>
                     </div>
                   </div>
-                  <div className="m-4 relative flex-col">
-                    <div className="pt-6 mb-9 flex items-center justify-center uppercase text-sm font-semibold">
-                      <br />
-                    </div>
-                    <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                      {donation.breed}
-                    </div>
-                    <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                      {donation.age} yr
-                    </div>
-                    <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                      {donation.state}
-                    </div>
-                    
+                  <div className="m-3 flex flex-col items-center justify-center">
+                    <ProtectedButton redirectTo="/adopt">
+                      Adopt me
+                    </ProtectedButton>
                   </div>
-                  
                 </div>
-                <div className="m-3 flex flex-col items-center justify-center">
-                      <ProtectedButton redirectTo="/adopt">
-                        Adopt me
-                      </ProtectedButton>
-                    </div>
-                </div>
-                
               </div>
             </div>
           ))}
@@ -170,7 +167,7 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
             <div className="md:shrink-0">
               <img
                 className="h-80 w-full object-cover md:w-64"
-                src={`http://localhost:5555${donation.petImage}`}
+                src={`${import.meta.env.VITE_API_URL}${donation.petImage}`}
                 alt="Pet Image"
               />
             </div>
