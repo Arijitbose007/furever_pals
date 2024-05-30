@@ -29,7 +29,7 @@ const RoleBasedRedirect = () => {
           navigate('/shelter');
         }
       } else {
-        const publicRoutes = ['/volunteer','/buddies', '/sos', '/contactus', '/donate', '/adopt','/adshelter', '/volshelter', '/sosshelter', '/shelter'];
+        const publicRoutes = ['/volunteer','/buddies', '/sos', '/contactus', '/donate', '/adopt'];
         console.log('Non-admin detected, current path:', location.pathname);
 
         if (!publicRoutes.includes(location.pathname)) {
