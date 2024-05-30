@@ -55,29 +55,29 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
 
     return items.filter((item) => {
       const matchesSearchQuery =
-        item.name.toLowerCase().includes(searchLower) ||
-        item.number.toLowerCase().includes(searchLower) ||
-        item.city.toLowerCase().includes(searchLower) ||
-        item.state.toLowerCase().includes(searchLower) ||
-        item.petType.toLowerCase().includes(searchLower) ||
-        item.gender.toLowerCase().includes(searchLower) ||
-        item.breed.toLowerCase().includes(searchLower);
+        (item.name && item.name.toLowerCase().includes(searchLower)) ||
+        (item.number && item.number.toLowerCase().includes(searchLower)) ||
+        (item.city && item.city.toLowerCase().includes(searchLower)) ||
+        (item.state && item.state.toLowerCase().includes(searchLower)) ||
+        (item.petType && item.petType.toLowerCase().includes(searchLower)) ||
+        (item.gender && item.gender.toLowerCase().includes(searchLower)) ||
+        (item.breed && item.breed.toLowerCase().includes(searchLower));
 
       const matchesFilters = filters.every((filter) => {
         if (filter === "Location") {
           return (
-            item.city?.toLowerCase().includes(searchLower) ||
-            item.state?.toLowerCase().includes(searchLower)
+            (item.city && item.city.toLowerCase().includes(searchLower)) ||
+            (item.state && item.state.toLowerCase().includes(searchLower))
           );
         }
         if (filter === "Pet Type") {
-          return item.petType?.toLowerCase().includes(searchLower);
+          return item.petType && item.petType.toLowerCase().includes(searchLower);
         }
         if (filter === "Gender") {
-          return item.gender?.toLowerCase().includes(searchLower);
+          return item.gender && item.gender.toLowerCase().includes(searchLower);
         }
         if (filter === "Breed") {
-          return item.breed?.toLowerCase().includes(searchLower);
+          return item.breed && item.breed.toLowerCase().includes(searchLower);
         }
         return true;
       });
