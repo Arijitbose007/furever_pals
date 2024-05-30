@@ -212,7 +212,9 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilters }) => {
                 </div>
               </div>
               <div className="flex justify-center mt-4 w-full">
-                <ProtectedButton redirectTo="/adopt">Adopt me</ProtectedButton>
+                <ProtectedButton redirectTo="/adopt">
+                  Adopt me
+                </ProtectedButton>
               </div>
             </div>
           </div>
