@@ -1,3 +1,4 @@
+// src/pages/Catalog.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProtectedButton from "../components/ProtectedButton";
@@ -6,7 +7,6 @@ import NoDataFound from "./NoDataFound";
 const Catalog = ({ isCarousel, searchQuery, selectedFilter }) => {
   const [approvedDonations, setApprovedDonations] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchDonations = async () => {
@@ -15,7 +15,6 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilter }) => {
         const allDonations = response.data.data;
         const approvedDonations = allDonations.filter(donation => donation.status === "Approved");
         setApprovedDonations(approvedDonations);
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching donations:", error);
       }
@@ -72,17 +71,10 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilter }) => {
 
   const displayedDonations = searchQuery ? filterItems(approvedDonations) : approvedDonations;
 
-  if (isLoading) {
-    return (
-      <div className="loading-disclaimer">
-        <p>🔄 Loading data, please wait...</p>
-      </div>
-    );
-  }
-
   if (displayedDonations.length === 0) {
     return <NoDataFound />;
   }
+
 
   if (isCarousel) {
     return (
@@ -100,9 +92,9 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilter }) => {
           {approvedDonations.map((donation) => (
             <div
               key={donation._id}
-              className="carousel-slide my-3 rounded-xl overflow-hidden"
+              className="carousel-slide my-3  rounded-xl overflow-hidden"
             >
-              <div className="md:flex rounded-xl shadow-2xl bg-cardColor">
+              <div className="md:flex rounded-xl  shadow-2xl bg-cardColor">
                 <div className="md:shrink-0 w-full md:w-auto">
                   <img
                     className="h-48 md:h-80 w-full object-cover rounded-xl md:w-60 lg:w-80"
@@ -114,33 +106,36 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilter }) => {
                   <div className="flex sm:w-108 md:gap-4 sm:gap-8 md:flex-row">
                     <div className="m-4 flex-col">
                       <div className="pt-6 pl-1 mb-9 uppercase text-sm font-semibold">
-                        {donation.name} 👓
+                        {donation.name}
                       </div>
                       <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                        {donation.gender} 🚻
+                        {donation.gender}
                       </div>
                       <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                        {donation.color} 🎨
+                        {donation.color}
                       </div>
                       <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                        {donation.city} 🌆
+                        {donation.city}
                       </div>
                     </div>
                     <div className="m-4 relative flex-col">
                       <div className="pt-6 mb-9 flex items-center justify-center uppercase text-sm font-semibold">
-                        {donation.breed} 🐕
+                        <br />
                       </div>
                       <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                        {donation.age} yr 🎂
+                        {donation.breed}
                       </div>
                       <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
-                        {donation.state} 🗺️
+                        {donation.age} yr
+                      </div>
+                      <div className="p-1 lg:pb-4 uppercase text-sm font-semibold">
+                        {donation.state}
                       </div>
                     </div>
                   </div>
                   <div className="m-3 flex flex-col items-center justify-center">
                     <ProtectedButton redirectTo="/adopt">
-                      🐾 Adopt me 🐾
+                      Adopt me
                     </ProtectedButton>
                   </div>
                 </div>
@@ -178,44 +173,44 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilter }) => {
               <div className="flex flex-col sm:flex-row sm:justify-between">
                 <div className="m-2 flex-col truncate overflow-hidden">
                   <div className="pt-2 pl-1 mb-2 uppercase text-sm font-semibold">
-                    {donation.fullName} 👤
+                    {donation.fullName}
                   </div>
                   <div className="p-1 uppercase mb-2 text-sm font-semibold">
-                    {donation.number} 📞
+                    {donation.number}
                   </div>
                   <div className="p-1 uppercase mb-2 text-sm font-semibold">
-                    {donation.city} 🌆
+                    {donation.city}
                   </div>
                   <div className="p-1 uppercase text-sm font-semibold">
-                    {donation.age} yr 🎂
+                    {donation.age} yr old
                   </div>
                 </div>
                 <div className="m-2 flex-col truncate overflow-hidden">
                   <div className="pt-2 pl-1 mb-2 uppercase text-sm font-semibold">
-                    {donation.gender} 🚻
+                    {donation.gender}
                   </div>
                   <div className="p-1 mb-2 uppercase text-sm font-semibold">
-                    {donation.breed} 🐕
+                    {donation.breed}
                   </div>
                   <div className="p-1 uppercase mb-2 text-sm font-semibold">
-                    {donation.state} 🗺️
+                    {donation.state}
                   </div>
                   <div className="p-1 uppercase text-sm font-semibold">
-                    {donation.color} 🎨
+                    {donation.color}
                   </div>
                 </div>
               </div>
               <div className="ml-2 w-full">
                 <div className="pt-2 pl-1 mb-2 uppercase text-sm font-semibold break-words">
-                  {donation.email} 📧
+                  {donation.email}
                 </div>
                 <div className="p-1 uppercase text-sm font-semibold break-words">
-                  {donation.address} 🏠
+                  {donation.address}
                 </div>
               </div>
               <div className="flex justify-center mt-4 w-full">
                 <ProtectedButton redirectTo="/adopt">
-                  🐾 Adopt me 🐾
+                  Adopt me
                 </ProtectedButton>
               </div>
             </div>
