@@ -1,8 +1,8 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import animationData from '../animations/noData.json'; // Assuming you have a Lottie animation file
+import animationData from '../animations/noData.json'; // Ensure you have this Lottie animation file
 
-const NoDataFound = () => {
+const NoDataFound = ({ isCarousel }) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -15,7 +15,9 @@ const NoDataFound = () => {
   return (
     <div className="flex flex-col items-center justify-center mt-8 p-4">
       <Lottie options={defaultOptions} height={300} width={300} speed={0.5} />
-      <p className="mt-4 text-center text-gray-600">Sorry, We Are unable To Find You A Buddy For Now :(</p>
+      <p className="text-gray-600 text-lg font-semibold mt-4">
+        {isCarousel ? "Backend data is loading. Please Stay tuned..." : "Unable to find you a buddy for now."}
+      </p>
     </div>
   );
 };

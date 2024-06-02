@@ -1,4 +1,3 @@
-// src/pages/Catalog.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProtectedButton from "../components/ProtectedButton";
@@ -72,9 +71,8 @@ const Catalog = ({ isCarousel, searchQuery, selectedFilter }) => {
   const displayedDonations = searchQuery ? filterItems(approvedDonations) : approvedDonations;
 
   if (displayedDonations.length === 0) {
-    return <NoDataFound />;
+    return <NoDataFound isCarousel={isCarousel} />;
   }
-
 
   if (isCarousel) {
     return (
